@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP D_Small_ALT
+D Diode, small symbol, filled shape
+K diode
+F ~
+$ENDCMP
+#
+$CMP SW_Push
+D Push button switch, generic, two pins
+K switch normally-open pushbutton push-button
+F ~
+$ENDCMP
+#
+#End Doc Library

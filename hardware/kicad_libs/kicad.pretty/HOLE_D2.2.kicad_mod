@@ -1,0 +1,10 @@
+(module HOLE_D2.2 (layer F.Cu) (tedit 6367AF4D)
+  (fp_text reference REF** (at 0 1.95) (layer Dwgs.User) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value HOLE_D2.2 (at 0 -1.95) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_circle (center 0 0) (end 0 2) (layer Dwgs.User) (width 0.12))
+  (pad "" np_thru_hole circle (at 0 0) (size 2.2 2.2) (drill 2.2) (layers *.Cu *.Mask))
+)

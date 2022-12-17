@@ -1,0 +1,13 @@
+.venv/
+.vscode/
+
+pcbflow/
+__pycache__/
+
+pcb_lib_sklib.py
+*.erc
+*.log
+*.net
+
+*.bck
+*.dcm
