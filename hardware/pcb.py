@@ -83,6 +83,10 @@ if __name__ == "__main__":
     BOARD_WIDTH = 76.0
     BOARD_HEIGHT = 57.0
 
+    KEY_PITCH = 19.0
+
+    SCREW_HOLE = 2.2
+
     LAYER_TOP = "GTL"
     LAYER_BOTTOM = "GBL"
 
@@ -97,7 +101,10 @@ if __name__ == "__main__":
 
     # assign placement position to skidl parts
     for sw, d, mapping in zip(switches, diodes, MATRIX_MAP):
-        sw.pos = pos(mapping[1] * 19 + 9.5, mapping[0] * 19 + 9.5)
+        sw.pos = pos(
+            mapping[1] * KEY_PITCH + KEY_PITCH / 2,
+            mapping[0] * KEY_PITCH + KEY_PITCH / 2,
+        )
         sw.side = "top"
         d.pos = (sw.pos[0] + 6, sw.pos[1] + 5)
         d.side = "bottom"
@@ -111,10 +118,10 @@ if __name__ == "__main__":
     oled.rotate = 270
 
     # add holes
-    board.add_hole(pos(38, 19), 2.2)
-    board.add_hole(pos(57, 19), 2.2)
-    board.add_hole(pos(57, 38), 2.2)
-    board.add_hole(pos(19, 38), 2.2)
+    board.add_hole(pos(KEY_PITCH * 2, KEY_PITCH), SCREW_HOLE)
+    board.add_hole(pos(KEY_PITCH * 3, KEY_PITCH), SCREW_HOLE)
+    board.add_hole(pos(KEY_PITCH * 3, KEY_PITCH * 2), SCREW_HOLE)
+    board.add_hole(pos(KEY_PITCH, KEY_PITCH * 2), SCREW_HOLE)
 
     # place parts on board
     for part in circuit.parts:
