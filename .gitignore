@@ -4,10 +4,14 @@
 pcbflow/
 __pycache__/
 
-pcb_lib_sklib.py
+*_sklib.py
 *.erc
 *.log
 *.net
 
 *.bck
 *.dcm
+
+*.Identifier
+
+keyboard-made-by-python/
