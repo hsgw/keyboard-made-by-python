@@ -138,10 +138,7 @@ if __name__ == "__main__":
 
     ### wiring
     xiaoRef = "U1"
-    xiaoPart = board.get_part(xiaoRef)
-
     oledRef = "DISP1"
-    oledPart = board.get_part(oledRef)
 
     # get connected pin number from skidl net
     # pin number is started from 1 in skidl, 0 in pcbflow
@@ -153,50 +150,11 @@ if __name__ == "__main__":
     # convert to correct pin number for solving the complication of the kicad library
     # apply newpath() for bug fix (the initial value has a strange value)
     def xiao_pads(net: str):
-        return xiaoPart.pads[get_pin_number_from_net(net, xiaoRef) + 14].newpath()
-
-    # d -> sw
-    for i in range(1, KEY_COUNT + 1):
-        sw = board.get_part(f"SW{i}")
-        d = board.get_part(f"D{i}")
-        d.pads[0].set_layer(LAYER_BOTTOM).w("f 1 r 45").align_meet(sw.pads[1], "x")
-
-    viaCol = [0] * 4
-    # col d->d (col 1-3)
-    for i in range(1, 4):
-        d1 = board.get_part(f"D{i}")
-        d2 = board.get_part(f"D{i+3}")
-        d3 = board.get_part(f"D{i+7}")
-        via = (
-            d1.pads[1]
-            .set_name(f"COL{i}")
-            .set_layer(LAYER_BOTTOM)
-            .w("l 180 f 1.25 r 45 f 2 l 45 f 6.5 l 45")
-            .align(d2.pads[1], "y")
-            .wire()
-            .via()
+        return (
+            board.get_part(xiaoRef)
+            .pads[get_pin_number_from_net(net, xiaoRef) + 14]
+            .newpath()
         )
-        viaCol[i] = via
-        via.set_layer(LAYER_BOTTOM).meet(d2.pads[1])
-        d2.pads[1].set_name(f"COL{i}").set_layer(LAYER_BOTTOM).w(
-            "l 180 f 1 r 45 f 2 l 45 f 6.5 l 45"
-        ).align_meet(d3.pads[1], "y")
-
-    # col 0 xiao-> d
-    xiao_pads("COL0").set_layer(LAYER_BOTTOM).w(
-        "l 180 f 18 r 45 f 2 r 45 f 9.5 l 45"
-    ).align_meet(board.get_part("D7").pads[1], "y")
-
-    # col 1-3 via -> xiao
-    viaCol[1].set_layer(LAYER_TOP).w("l 45 f 11 l 45").align_meet(
-        xiao_pads("COL1"), "x"
-    )
-    viaCol[2].set_layer(LAYER_TOP).w("f 2 l 45 f 29.5 l 45").align_meet(
-        xiao_pads("COL2"), "x"
-    )
-    viaCol[3].set_layer(LAYER_TOP).w("f 4 l 45 f 48.5 l 45").align_meet(
-        xiao_pads("COL3"), "x"
-    )
 
     # row xiao -> sw
     xiao_pads("ROW0").set_layer(LAYER_TOP).w("r 45").align_meet(
@@ -209,6 +167,12 @@ if __name__ == "__main__":
         board.get_part("SW8").pads[0], "y"
     )
 
+    # d -> sw
+    for i in range(1, KEY_COUNT + 1):
+        sw = board.get_part(f"SW{i}")
+        d = board.get_part(f"D{i}")
+        d.pads[0].set_layer(LAYER_BOTTOM).w("f 1 r 45").align_meet(sw.pads[1], "x")
+
     # row sw->sw
     for i in range(3):
         refs = list(x.ref for x in netRows[i].pins if x.ref.startswith("SW"))
@@ -217,11 +181,41 @@ if __name__ == "__main__":
                 "r 90 f 2 l 45 f 1 r 45 f 2.5 r 45 f1"
             ).meet(board.get_part(refs[j + 1]).pads[0])
 
+    # store via
+    viaCol = [0] * 4
+    # col d->d (col 1-3)
+    for i in range(1, 4):
+        d1 = board.get_part(f"D{i}")
+        d2 = board.get_part(f"D{i+3}")
+        d3 = board.get_part(f"D{i+7}")
+        via = (
+            d1.pads[1]
+            .set_layer(LAYER_BOTTOM)
+            .w("l 180 f 1.25 r 45 f 2 l 45 f 6.5 l 45")
+            .align(d2.pads[1], "y")
+            .wire()
+            .via()
+        )
+        viaCol[i] = via
+        via.set_layer(LAYER_BOTTOM).meet(d2.pads[1])
+        d2.pads[1].set_layer(LAYER_BOTTOM).w(
+            "l 180 f 1 r 45 f 2 l 45 f 6.5 l 45"
+        ).align_meet(d3.pads[1], "y")
+
+    # col 1-3 via -> xiao
+    viaCol[1].set_layer(LAYER_TOP).w("l 45 f 11 l 45").align_meet(
+        xiao_pads("COL1"), "x"
+    )
+    viaCol[2].set_layer(LAYER_TOP).w("f 2 l 45 f 29.5 l 45").align_meet(
+        xiao_pads("COL2"), "x"
+    )
+    viaCol[3].set_layer(LAYER_TOP).w("f 4 l 45 f 48.5 l 45").align_meet(
+        xiao_pads("COL3"), "x"
+    )
+
     # xiao -> oled
-    OLED_NETS = ["GND", "3.3V", "SCL", "SDA"]
-    OLED_GAP = [0, 3.6, 7.2, 10.5]
-    for net, gap in zip(OLED_NETS, OLED_GAP):
-        oledPin = board.get_part(oledRef).pads[get_pin_number_from_net(net, "DISP1")]
+    for net in ["GND", "3.3V", "SCL", "SDA"]:
+        oledPin = board.get_part(oledRef).pads[get_pin_number_from_net(net, oledRef)]
         xiao_pads(net).set_layer(LAYER_TOP).left(135).align_meet(oledPin, "y")
 
     # for layer in [LAYER_TOP, LAYER_BOTTOM]:
