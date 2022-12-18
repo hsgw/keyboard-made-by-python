@@ -2,7 +2,7 @@ import cadquery as cq
 
 # use cq-server as gui, uncomment below line
 # you can run cq-server `cd hardware && docker run -p 5000:5000 -v $(pwd):/data cadquery/cadquery-server run /data`
-from cq_server.ui import ui, show_object
+# from cq_server.ui import ui, show_object
 
 PCB_WIDTH = 76.0
 PCB_HEIGHT = 57.0
@@ -105,9 +105,9 @@ oled_cover = (
 )
 
 # if use cq-server, uncomment
-show_object(case, name="case")
-show_object(pcb, name="pcb", options=dict(color=(0, 1, 0)))
-show_object(oled_cover)
+# show_object(case, name="case")
+# show_object(pcb, name="pcb", options=dict(color=(0, 1, 0)))
+# show_object(oled_cover)
 
 cq.exporters.export(case, "hardware/build/case/case.stl")
 cq.exporters.export(oled_cover, "hardware/build/case/oled_cover.stl")
