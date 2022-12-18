@@ -2,13 +2,13 @@ import cadquery as cq
 
 # use cq-server as gui, uncomment below line
 # you can run cq-server `cd hardware && docker run -p 5000:5000 -v $(pwd):/data cadquery/cadquery-server run /data`
-# from cq_server.ui import ui, show_object
+from cq_server.ui import ui, show_object
 
 PCB_WIDTH = 76.0
 PCB_HEIGHT = 57.0
 PCB_THICKNESS = 1.6
 
-CASE_MARGIN_TOP = 5.0
+CASE_MARGIN_TOP = 10.0
 CASE_MARGIN_BOTTOM = 3.5
 CASE_MARGIN_PCB = 0.5
 
@@ -92,7 +92,7 @@ pcb = (
 
 OLED_COVER_WIDTH = 19
 OLED_COVER_HEIGHT = 19 * 2 - 3
-OLED_COVER_THICKNESS = 5.5
+OLED_COVER_THICKNESS = 10
 
 oled_cover = (
     cq.Workplane("XY")
@@ -102,16 +102,12 @@ oled_cover = (
     .center(OLED_COVER_WIDTH / 2, -OLED_COVER_HEIGHT / 2)
     .rect(OLED_COVER_WIDTH, OLED_COVER_HEIGHT)
     .extrude(OLED_COVER_THICKNESS)
-    .faces("Z")
-    .tag("CASE_TOP")
-    .edges(">Y or <X")
-    .chamfer(1)
 )
 
 # if use cq-server, uncomment
-# show_object(case, name="case")
-# show_object(pcb, name="pcb", options=dict(color=(0, 1, 0)))
-# show_object(oled_cover)
+show_object(case, name="case")
+show_object(pcb, name="pcb", options=dict(color=(0, 1, 0)))
+show_object(oled_cover)
 
 cq.exporters.export(case, "hardware/build/case/case.stl")
 cq.exporters.export(oled_cover, "hardware/build/case/oled_cover.stl")
