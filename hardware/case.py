@@ -92,7 +92,7 @@ pcb = (
 
 OLED_COVER_WIDTH = 19
 OLED_COVER_HEIGHT = 19 * 2 - 3
-OLED_COVER_THICKNESS = 7
+OLED_COVER_THICKNESS = 5.5
 
 oled_cover = (
     cq.Workplane("XY")
@@ -105,7 +105,7 @@ oled_cover = (
     .faces("Z")
     .tag("CASE_TOP")
     .edges(">Y or <X")
-    .chamfer(2)
+    .chamfer(1)
 )
 
 # if use cq-server, uncomment
