@@ -1,0 +1,12 @@
+G04 pcbflow Gerber RS-274X export*
+G75*
+%MOMM*%
+%FSLAX34Y34*%
+%LPD*%
+%INTop Paste*%
+%IPPOS*%
+%AMOC8*
+5,1,8,0,0,1.08239X$1,22.5*%
+G01*
+%ADD10C,0.010000*%
+%TF.FileFunction,Paste,Top*%M02*
