@@ -1,3 +1,6 @@
+> これは[キーボード #1 Advent Calendar 2022](https://adventar.org/calendars/7529)の20日目の記事の一部です。   
+> トップページは[Pythonだけでキーボードを作る](https://5z6p.com/2022/12/21/ac2022/)です。
+
 # ファームウェアを作る
 ファームウェアは組み込み向けPythonの[CircuitPython](https://circuitpython.org/)ベースで実装された[KMK Firmware](https://github.com/KMKfw/kmk_firmware)を使用します。   
 - CircuitPython https://circuitpython.org/
