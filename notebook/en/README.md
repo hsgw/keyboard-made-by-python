@@ -23,7 +23,7 @@ PCB, case, and firmware data are not guaranteed. Please let me know if there are
 |  Purpose   |library|
 |------------|-----|
 |Circuit     |[skidl](https://github.com/devbisme/skidl)|
-|PCB         |[pcbflow](https://github.com/michaelgale/pcbflow) ([folkしたリポジトリ](https://github.com/hsgw/pcbflow/tree/fix_kicad))|
+|PCB         |[pcbflow](https://github.com/michaelgale/pcbflow) ([my folk](https://github.com/hsgw/pcbflow/tree/fix_kicad))|
 |Case        |[cadquery](https://github.com/CadQuery/cadquery)|
 |Firmware    |[KMK Firmware](https://github.com/KMKfw/kmk_firmware), [circuitpython](https://circuitpython.org/)|
 
@@ -48,7 +48,7 @@ The case section uses [binder](https://mybinder.org) for environmental reasons. 
 
 - [What is google colaboratory](https://colab.research.google.com/github/hsgw/keyboard-made-by-python/blob/main/notebook/en/what_is_colaboratory.ipynb)
 - [Design PCB](https://colab.research.google.com/github/hsgw/keyboard-made-by-python/blob/main/notebook/en/pcb.ipynb)
-- [Design case](https://mybinder.org/v2/gh/hsgw/keyboard-made-by-python/HEAD?labpath=notebook%2Fen%2Fcase.ipynb) * [binder](https:// mybinder.org). It may take some time to display.
+- [Design case](https://mybinder.org/v2/gh/hsgw/keyboard-made-by-python/HEAD?labpath=notebook%2Fen%2Fcase.ipynb) * [binder](https://mybinder.org). It may take some time to display.
 - [Create firmware](firmware.md) 
 
 # Impressions

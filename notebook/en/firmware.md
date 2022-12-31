@@ -1,5 +1,4 @@
-> これは[キーボード #1 Advent Calendar 2022](https://adventar.org/calendars/7529)の20日目の記事の一部です。   
-> トップページは[Pythonだけでキーボードを作る](https://5z6p.com/2022/12/21/ac2022/)です。
+> Project page is [Keyboard as a Python Code](https://hackaday.io/project/188907-keyboard-as-a-python-code)
 
 # Create firmware
 The firmware uses [KMK Firmware](https://github.com/KMKfw/kmk_firmware), based on [CircuitPython](https://circuitpython.org/), which is an embedded Python Implementation.    
